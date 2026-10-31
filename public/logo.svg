@@ -1,0 +1,31 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="vectryx-chrome-1" x1="4" y1="4" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="35%" stop-color="#D9D9D9"/>
+      <stop offset="70%" stop-color="#8E8E8E"/>
+      <stop offset="100%" stop-color="#3A3A3A"/>
+    </linearGradient>
+    <linearGradient id="vectryx-chrome-2" x1="36" y1="4" x2="4" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#A7A7A7"/>
+      <stop offset="100%" stop-color="#1A1A1A"/>
+    </linearGradient>
+    <filter id="glow" x="0" y="0" width="40" height="40" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Hexagonal Dark Badge -->
+  <rect x="2" y="2" width="36" height="36" rx="9" fill="#0C0C0C" stroke="#2B2B2B"/>
+
+  <!-- Left Sharp Vector Blade of 'V' -->
+  <path d="M9 10L18.5 29C19.2 30.4 20.8 30.4 21.5 29L31 10H25.5L20 22L14.5 10H9Z" fill="url(#vectryx-chrome-1)"/>
+
+  <!-- Floating Liquid Chrome Diagonal Blade (Inner Accent) -->
+  <path d="M14 10L20 23.5L26 10H22L20 15L18 10H14Z" fill="url(#vectryx-chrome-2)" opacity="0.85"/>
+
+  <!-- Core Specular Reflection Dot -->
+  <circle cx="20" cy="20" r="1.5" fill="#FFFFFF" filter="url(#glow)"/>
+</svg>

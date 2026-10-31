@@ -1,0 +1,36 @@
+<svg width="800" height="500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="500" rx="12" fill="#080808"/>
+  <rect x="0.5" y="0.5" width="799" height="499" rx="11.5" stroke="#303030"/>
+
+  <!-- Terminal Style Window -->
+  <rect x="60" y="40" width="680" height="420" rx="10" fill="#0D0D0D" stroke="#262626"/>
+  <rect x="60" y="40" width="680" height="38" rx="10 10 0 0" fill="#141414" stroke="#262626"/>
+  
+  <circle cx="85" cy="59" r="5" fill="#3D3D3D"/>
+  <circle cx="102" cy="59" r="5" fill="#2E2E2E"/>
+  <circle cx="119" cy="59" r="5" fill="#2E2E2E"/>
+  <text x="320" y="63" fill="#888888" font-family="monospace" font-size="11">vectryx-agent-runtime v1.4</text>
+
+  <!-- ReAct Agent Thought Loop -->
+  <!-- Prompt User Bubble -->
+  <rect x="90" y="100" width="480" height="44" rx="8" fill="#181818" stroke="#333333"/>
+  <text x="110" y="126" fill="#F0F0F0" font-family="sans-serif" font-size="13">Refactor the authentication middleware to enforce token bucket rate limits.</text>
+
+  <!-- Agent Thought 1 -->
+  <rect x="140" y="160" width="520" height="60" rx="8" fill="#121212" stroke="#252525"/>
+  <text x="160" y="184" fill="#999999" font-family="monospace" font-size="11">[THOUGHT] Analyzing repository security posture and sliding window thresholds...</text>
+  <text x="160" y="204" fill="#D9D9D9" font-family="monospace" font-size="11">&gt; Loaded /lib/security/rate-limit.ts (Active window: 60s)</text>
+
+  <!-- Agent Action 1 -->
+  <rect x="140" y="235" width="520" height="85" rx="8" fill="#161616" stroke="#383838"/>
+  <text x="160" y="258" fill="#A7A7A7" font-family="monospace" font-size="11">[ACTION EXECUTION] Dispatched AST parser on route handlers</text>
+  <rect x="160" y="272" width="380" height="34" rx="4" fill="#0A0A0A" stroke="#222222"/>
+  <text x="175" y="293" fill="#D9D9D9" font-family="monospace" font-size="11">Applied sliding window: limit=5, window=60000ms</text>
+
+  <!-- Completed Agent Output -->
+  <rect x="90" y="340" width="570" height="90" rx="8" fill="#1C1C1C" stroke="#444444"/>
+  <text x="110" y="365" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="600">Verification Complete</text>
+  <text x="110" y="388" fill="#B0B0B0" font-family="sans-serif" font-size="12">14 routes tested against simulated concurrency. 0 memory leaks, 100% token validation pass.</text>
+  <rect x="110" y="402" width="120" height="18" rx="3" fill="#2A2A2A"/>
+  <text x="120" y="415" fill="#D9D9D9" font-family="monospace" font-size="10">ALL CHECKS GREEN</text>
+</svg>

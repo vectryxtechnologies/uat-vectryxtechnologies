@@ -1,34 +1,35 @@
-# Environments & Secrets
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+
+# Production
+/build
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env*.local
 .env
-*.env
-.venv/
-.venv*/
-env/
-venv/
-ENV/
+!.env.example
 
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+# Vercel
+.vercel
 
-# Testing & Coverage
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-
-# VS Code & IDE settings
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Builds & Distribution
-dist/
-build/
-*.egg-info/
-
-# Logs & Databases
-*.log
-mongo_data/
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
