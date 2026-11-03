@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Mail, Github, Linkedin, ArrowUpRight, Clock, ShieldCheck } from "lucide-react";
+import { Mail, Linkedin, ArrowUpRight, Clock, ShieldCheck } from "lucide-react";
 import { ContactForm } from "@/components/forms/contact-form";
 import { companyDetails } from "@/lib/data/navigation";
 import { Card } from "@/components/ui/card";
@@ -55,25 +55,6 @@ export default function ContactPage() {
                       className="text-sm font-mono text-silver-chrome hover:text-white hover:underline font-semibold"
                     >
                       {companyDetails.email}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="p-2.5 rounded-lg bg-surface-charcoal border border-border text-silver-platinum shrink-0 mt-0.5">
-                    <Github className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="font-mono text-[11px] text-silver-muted uppercase block">
-                      Source Code &amp; Repositories
-                    </span>
-                    <a
-                      href={companyDetails.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm font-mono text-silver-chrome hover:text-white hover:underline"
-                    >
-                      github.com/subhamoy05/Vectryx
                     </a>
                   </div>
                 </div>

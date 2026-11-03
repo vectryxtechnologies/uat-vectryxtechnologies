@@ -105,7 +105,6 @@ export default function RootLayout({
       "Vectryx Technologies delivers custom software development, professional websites, AI and machine learning solutions, mobile applications and technical project guidance.",
     email: "inquiries@vectryx.com",
     sameAs: [
-      "https://github.com/subhamoy05/Vectryx",
       "https://linkedin.com/company/vectryx-technologies",
     ],
   };

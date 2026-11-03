@@ -4,7 +4,6 @@ export interface NavLink {
 }
 
 export const mainNavLinks: NavLink[] = [
-  { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Solutions", href: "/solutions" },
   { label: "Projects", href: "/projects" },
@@ -42,7 +41,6 @@ export const companyDetails = {
   positioning: "Engineering Digital Excellence.",
   tagline: "Build Smarter. Automate Better. Scale Faster.",
   email: "inquiries@vectryx.com",
-  github: "https://github.com/subhamoy05/Vectryx",
   linkedin: "https://linkedin.com/company/vectryx-technologies",
   address: "India",
   foundedYear: 2024,
