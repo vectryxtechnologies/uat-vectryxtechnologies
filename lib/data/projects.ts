@@ -46,7 +46,7 @@ export const projectsData: ProjectItem[] = [
       { label: "Concurrency", value: "Zero-Collision Sync" },
       { label: "Deployment", value: "Docker / Cloud" },
     ],
-    githubUrl: "https://github.com/subhamoy05/Vectryx",
+
     coverImage: "/projects/collabflow.svg",
     architectureNotes: [
       "Optimistic UI state dispatch with rollback on network failure",
@@ -78,7 +78,7 @@ export const projectsData: ProjectItem[] = [
       { label: "Stack", value: "Full-Stack Node" },
       { label: "Coverage", value: "Hyperlocal Radius" },
     ],
-    githubUrl: "https://github.com/subhamoy05/Vectryx",
+
     coverImage: "/projects/mybazar.svg",
     architectureNotes: [
       "Geospatial indexing using 2dsphere coordinates in MongoDB",
@@ -109,7 +109,7 @@ export const projectsData: ProjectItem[] = [
       { label: "Format Support", value: "PDF & DOCX" },
       { label: "Data Safety", value: "Zero-Persistence" },
     ],
-    githubUrl: "https://github.com/subhamoy05/Vectryx",
+
     coverImage: "/projects/resume-analyzer.svg",
     architectureNotes: [
       "FastAPI microservice executing tokenization and cosine similarity calculations",
@@ -139,7 +139,7 @@ export const projectsData: ProjectItem[] = [
       { label: "Context Window", value: "Ranked Retrieval" },
       { label: "Status", value: "Active Iteration" },
     ],
-    githubUrl: "https://github.com/subhamoy05/Vectryx",
+
     coverImage: "/projects/assistant.svg",
     architectureNotes: [
       "Chain-of-thought verification before external action execution",

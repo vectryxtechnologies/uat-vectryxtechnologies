@@ -5,7 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "chrome" | "secondary" | "outline" | "ghost";
+  variant?: "chrome" | "brand" | "secondary" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
   href?: string;
   target?: string;
@@ -75,17 +75,19 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variantClasses = {
       chrome:
-        "bg-gradient-to-r from-silver-chrome via-silver-platinum to-silver-metallic text-background font-semibold hover:shadow-chrome-glow hover:brightness-105 active:scale-[0.98] border border-white/30",
+        "bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-royal text-white font-semibold hover:shadow-chrome-glow hover:brightness-110 active:scale-[0.98] border border-white/20",
+      brand:
+        "bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-royal text-white font-semibold hover:shadow-brand-glow hover:brightness-110 active:scale-[0.98] border border-white/20",
       secondary:
-        "bg-surface-charcoal/90 text-silver-chrome border border-white/10 hover:border-silver-metallic/60 hover:bg-surface-graphite hover:text-white active:scale-[0.98] shadow-sm backdrop-blur-md",
+        "bg-surface-charcoal/90 text-silver-chrome border border-white/10 hover:border-brand-blue/40 hover:bg-surface-graphite hover:text-white active:scale-[0.98] shadow-sm backdrop-blur-md",
       outline:
-        "bg-transparent text-silver-platinum border border-border hover:border-silver-metallic hover:bg-white/5 active:scale-[0.98]",
+        "bg-transparent text-silver-platinum border border-border hover:border-brand-blue/50 hover:bg-white/5 active:scale-[0.98]",
       ghost:
         "bg-transparent text-silver-muted hover:text-silver-chrome hover:bg-white/5 active:scale-[0.98]",
     }[variant];
 
     const baseClasses = cn(
-      "relative inline-flex items-center justify-center font-heading rounded-md cursor-pointer select-none transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-silver-platinum focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed",
+      "relative inline-flex items-center justify-center font-heading rounded-md cursor-pointer select-none transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed",
       sizeClasses,
       variantClasses,
       className
