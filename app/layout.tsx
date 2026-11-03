@@ -69,7 +69,7 @@ export const metadata: Metadata = {
       "We transform ideas into powerful digital products through innovative software development, modern technologies and reliable project delivery.",
     images: [
       {
-        url: "/logo.svg",
+        url: "/company-logo.png",
         width: 1200,
         height: 630,
         alt: "Vectryx Technologies - Engineering Digital Excellence",
@@ -81,12 +81,15 @@ export const metadata: Metadata = {
     title: "Vectryx Technologies | Engineering Digital Excellence",
     description:
       "Custom software engineering, AI systems, and technical project development.",
-    images: ["/logo.svg"],
+    images: ["/company-logo.png"],
   },
   icons: {
-    icon: "/logo.svg",
-    shortcut: "/logo.svg",
-    apple: "/logo.svg",
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/logo.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/icon.png",
+    apple: "/icon.png",
   },
 };
 
@@ -100,7 +103,7 @@ export default function RootLayout({
     "@type": "Organization",
     name: "Vectryx Technologies",
     url: siteUrl,
-    logo: `${siteUrl}/logo.svg`,
+    logo: `${siteUrl}/icon.png`,
     description:
       "Vectryx Technologies delivers custom software development, professional websites, AI and machine learning solutions, mobile applications and technical project guidance.",
     email: "inquiries@vectryx.com",
