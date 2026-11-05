@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -33,13 +34,13 @@ const config: Config = {
           metallic: "rgba(255,255,255,0.18)",
         },
 
-        /* Brand palette */
+        /* Brand palette — black + trust blue */
         brand: {
-          cyan: "#00C8F4",
-          blue: "#0875F9",
-          royal: "#303BFA",
-          violet: "#7025F5",
-          purple: "#A020F0",
+          cyan: "#60A5FA",
+          blue: "#2563EB",
+          royal: "#1D4ED8",
+          violet: "#1E3A8A",
+          purple: "#172554",
         },
       },
 
@@ -52,9 +53,9 @@ const config: Config = {
       backgroundImage: {
         /* Brand gradient */
         "brand-gradient":
-          "linear-gradient(110deg, #00C8F4, #0875F9, #303BFA, #7025F5, #A020F0)",
+          "linear-gradient(110deg, #60A5FA, #2563EB, #1D4ED8, #1E3A8A, #0B1220)",
         "brand-gradient-r":
-          "linear-gradient(90deg, #00C8F4, #0875F9, #303BFA, #7025F5, #A020F0)",
+          "linear-gradient(90deg, #60A5FA, #2563EB, #1D4ED8, #1E3A8A)",
         "brand-radial":
           "radial-gradient(circle at 50% 0%, rgba(8,117,249,0.18) 0%, rgba(8,15,37,0) 70%)",
 
