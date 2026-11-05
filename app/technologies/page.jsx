@@ -9,8 +9,8 @@ export default function Technologies() {
         <div className="grid gap-5 md:grid-cols-2">
           {TECH.map((g) => (
             <div key={g.group} className={card}>
-              <h3 className="mb-4 text-lg font-bold text-white">{g.group}</h3>
-              <div className="flex flex-wrap gap-2">{g.items.map((i) => <span key={i} className="rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-sm font-medium text-slate-200">{i}</span>)}</div>
+              <h3 className="mb-4 text-lg font-bold">{g.group}</h3>
+              <div className="flex flex-wrap gap-2">{g.items.map((i) => <span key={i} className="rounded-full border border-zinc-200/80 bg-slate-100 px-3.5 py-1.5 text-sm font-medium dark:border-white/10 dark:bg-white/5">{i}</span>)}</div>
             </div>
           ))}
         </div>
