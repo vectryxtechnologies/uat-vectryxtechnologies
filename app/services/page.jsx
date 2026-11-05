@@ -5,7 +5,7 @@ export default function Services() {
   return (
     <>
       <PageHeader eyebrow="Services" title="End-to-end digital engineering." intro="Pick one service or combine several. We scale the team to what your project needs." />
-      <Section className="pt-4"><ServiceGrid /></Section>
+      <Section><ServiceGrid /></Section>
       <CTA />
     </>
   );
