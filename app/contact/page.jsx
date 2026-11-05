@@ -12,13 +12,13 @@ export default function Contact() {
   return (
     <>
       <PageHeader eyebrow="Contact" title="Let's talk about your project." intro="Email or message us and we'll reply within one business day." />
-      <Section className="pt-4">
-        <div className="grid gap-5 md:grid-cols-3">
+      <Section>
+        <div className="grid gap-4 md:grid-cols-3">
           {items.map(([I, t, v, h]) => (
             <div key={t} className={card}>
-              <I className="mb-4 h-6 w-6 text-blue-600" />
-              <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{t}</p>
-              {h ? <a href={h} className="mt-1 block font-semibold hover:text-blue-600">{v}</a> : <p className="mt-1 font-semibold">{v}</p>}
+              <span className="mb-4 grid h-10 w-10 place-items-center rounded-lg border border-border bg-subtle text-foreground"><I className="h-4 w-4" /></span>
+              <p className="font-mono text-xs uppercase tracking-[0.08em] text-faint">{t}</p>
+              {h ? <a href={h} className="mt-1 block font-medium hover:text-accent">{v}</a> : <p className="mt-1 font-medium">{v}</p>}
             </div>
           ))}
         </div>

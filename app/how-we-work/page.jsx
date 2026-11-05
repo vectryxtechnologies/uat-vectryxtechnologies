@@ -5,7 +5,7 @@ export default function HowWeWork() {
   return (
     <>
       <PageHeader eyebrow="How we work" title="Clear steps. No surprises." intro="A process built around communication, short feedback loops and shipping early." />
-      <Section className="pt-4"><Steps /></Section>
+      <Section><Steps /></Section>
       <CTA />
     </>
   );
