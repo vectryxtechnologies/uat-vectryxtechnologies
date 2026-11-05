@@ -17,14 +17,14 @@ export default function ServicePage({ params }) {
         <div className={card}>
           <h2 className="mb-4 text-xl font-bold">What we deliver</h2>
           <ul className="space-y-3">
-            {s.points.map((p) => <li key={p} className="flex gap-3 text-slate-300"><Check className="mt-0.5 h-5 w-5 shrink-0 text-blue-400" />{p}</li>)}
+            {s.points.map((p) => <li key={p} className="flex gap-3 text-zinc-700 dark:text-zinc-300"><Check className="mt-0.5 h-5 w-5 shrink-0 text-blue-500" />{p}</li>)}
           </ul>
         </div>
         <Visual image={s.image} alt={s.title} icon={s.icon} />
       </Section>
       <Section eyebrow="Explore" title="Other services">
         <div className="flex flex-wrap gap-3">
-          {SERVICES.filter((x) => x.slug !== s.slug).map((x) => <Link key={x.slug} href={`/services/${x.slug}`} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-200 hover:border-blue-500">{x.title}</Link>)}
+          {SERVICES.filter((x) => x.slug !== s.slug).map((x) => <Link key={x.slug} href={`/services/${x.slug}`} className="rounded-full border border-zinc-200/80 bg-white px-4 py-2 text-sm font-medium hover:border-blue-500 dark:border-white/10 dark:bg-white/5">{x.title}</Link>)}
         </div>
       </Section>
       <CTA />

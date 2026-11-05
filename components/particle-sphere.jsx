@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-const COLORS = ["#1D4ED8", "#2563EB", "#3B82F6", "#60A5FA", "#0F172A", "#93C5FD", "#1E3A8A"];
+const COLORS = ["#0070f3", "#3291ff", "#7928ca", "#ededed", "#a1a1a1", "#666666"];
 const N = 520;
 
 export default function ParticleSphere({ className }) {
@@ -9,9 +9,11 @@ export default function ParticleSphere({ className }) {
   useEffect(() => {
     const cv = ref.current, ctx = cv.getContext("2d");
     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const fg = getComputedStyle(document.documentElement).getPropertyValue("--fg").trim() || "#000000";
     const pts = Array.from({ length: N }, (_, i) => {
       const y = 1 - (2 * (i + 0.5)) / N, r = Math.sqrt(1 - y * y), t = i * 2.399963;
-      return { x: Math.cos(t) * r, y, z: Math.sin(t) * r, c: COLORS[Math.floor(Math.random() * COLORS.length)], a: Math.random() * 6.28 };
+      const pool = [...COLORS, fg];
+      return { x: Math.cos(t) * r, y, z: Math.sin(t) * r, c: pool[Math.floor(Math.random() * pool.length)], a: Math.random() * 6.28 };
     });
     let W = 0, H = 0, raf = 0, rot = 0, mx = 0, my = 0, tx = 0, ty = 0;
     const resize = () => {
@@ -28,9 +30,9 @@ export default function ParticleSphere({ className }) {
       for (const o of out) {
         const d = (o.z + 1) / 2, len = 5 + d * 7, ang = Math.atan2(o.y, o.x) + Math.PI / 2 + o.p.a * 0.15;
         const px = W / 2 + o.x * R, py = H / 2 + o.y * R, dx = (Math.cos(ang) * len) / 2, dy = (Math.sin(ang) * len) / 2;
-        ctx.globalAlpha = 0.25 + d * 0.75;
-        ctx.strokeStyle = o.p.c === "#0F172A" ? "#93C5FD" : o.p.c;
-        ctx.lineWidth = 2.2 * (0.55 + d * 0.7);
+        ctx.globalAlpha = 0.12 + d * 0.55;
+        ctx.strokeStyle = o.p.c;
+        ctx.lineWidth = 1.6 * (0.55 + d * 0.45);
         ctx.beginPath(); ctx.moveTo(px - dx, py - dy); ctx.lineTo(px + dx, py + dy); ctx.stroke();
       }
       ctx.globalAlpha = 1; raf = requestAnimationFrame(draw);

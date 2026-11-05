@@ -16,9 +16,9 @@ export default function Contact() {
         <div className="grid gap-5 md:grid-cols-3">
           {items.map(([I, t, v, h]) => (
             <div key={t} className={card}>
-              <I className="mb-4 h-6 w-6 text-blue-400" />
-              <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">{t}</p>
-              {h ? <a href={h} className="mt-1 block font-semibold text-white hover:text-blue-400">{v}</a> : <p className="mt-1 font-semibold text-white">{v}</p>}
+              <I className="mb-4 h-6 w-6 text-blue-600" />
+              <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{t}</p>
+              {h ? <a href={h} className="mt-1 block font-semibold hover:text-blue-600">{v}</a> : <p className="mt-1 font-semibold">{v}</p>}
             </div>
           ))}
         </div>

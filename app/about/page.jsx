@@ -12,16 +12,20 @@ export default function About() {
     <>
       <PageHeader eyebrow="About us" title="We build software that fits how you actually work." intro="Vectryx Technologies is a software and AI engineering team helping businesses replace manual processes with reliable digital systems." />
       <Section className="grid items-center gap-10 lg:grid-cols-2">
-        <div className="space-y-4 leading-relaxed text-slate-400">
+        <div className="space-y-4 leading-relaxed text-muted">
           <p>Our team combines product thinking, engineering and cloud expertise, so ideas move from sketch to production without hand-offs getting lost.</p>
           <p>Replace this paragraph with your company story, founding year, team size and the industries you serve.</p>
         </div>
         <Visual image={null} alt="Our team" icon={Handshake} />
       </Section>
       <Section eyebrow="Our values" title="What guides us">
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-3">
           {values.map(([I, t, d]) => (
-            <div key={t} className={card}><I className="mb-4 h-6 w-6 text-blue-400" /><h3 className="mb-2 font-bold text-white">{t}</h3><p className="text-sm text-slate-400">{d}</p></div>
+            <div key={t} className={card}>
+              <span className="mb-4 grid h-10 w-10 place-items-center rounded-lg border border-border bg-subtle text-foreground"><I className="h-4 w-4" /></span>
+              <h3 className="mb-2 font-semibold tracking-[-0.03em]">{t}</h3>
+              <p className="text-sm text-muted">{d}</p>
+            </div>
           ))}
         </div>
       </Section>

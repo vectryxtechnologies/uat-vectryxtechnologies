@@ -1,0 +1,51 @@
+---
+description: Design system (Next.js / Geist style)
+alwaysApply: true
+---
+
+# Design system (Next.js / Geist style)
+
+Restyle and keep this Next.js 14 (App Router, JSX, Tailwind) site aligned with the nextjs.org / Vercel Geist design language.
+
+## Rules
+
+- Do not change routes, page structure, copy or data in `lib/site.js`.
+- Use semantic tokens only: `bg-background`, `text-foreground`, `text-muted`, `text-faint`, `border-border`, `bg-surface`, `bg-subtle`, `bg-accent`, `text-accent`, `bg-accent-soft`. No raw hex in components (particle sphere colours are the only allowed hex).
+- Geist Sans + Geist Mono. No Plus Jakarta Sans.
+- Dark mode follows `prefers-color-scheme` via CSS variables. Do not add redundant `dark:` colour variants.
+- Accessible: visible `:focus-visible` rings, AA contrast, `prefers-reduced-motion` respected.
+
+## Principles
+
+- Monochrome first. Pure black and white carry the page; blue is used sparingly for focus, links and one highlight.
+- Sharp, not soft. 1px borders define everything. No drop shadows on cards. Radii are small (6–12px). Pills only for primary CTAs.
+- Tight, confident type. Geist Sans at weight 500–600, negative letter-spacing on headings, Geist Mono for labels and tags.
+- Framed layout. Content sits in a centred column with hairline vertical borders and horizontal dividers between sections.
+- Quiet motion. Small fades and 1–2px lifts only.
+
+## Type
+
+| Use | Font | Weight | Tracking |
+| --- | --- | --- | --- |
+| H1 | Geist Sans | 600 | -0.05em |
+| H2 / H3 | Geist Sans | 600 | -0.03em |
+| Body | Geist Sans | 400 | normal |
+| Eyebrows, tags, labels | Geist Mono | 400–500 | 0.08em, uppercase |
+
+H1: `text-5xl sm:text-7xl font-semibold tracking-[-0.05em] leading-[1.02]`
+H2: `text-3xl sm:text-5xl font-semibold tracking-[-0.03em]`
+Body: `text-base sm:text-lg text-muted leading-relaxed`
+Eyebrow: `font-mono text-xs uppercase tracking-[0.08em] text-muted`
+
+## Layout
+
+- Page frame: `mx-auto max-w-[1200px] border-x border-border`
+- Sections: `px-6 sm:px-10 py-20 border-b border-border`
+- Navbar: full-width sticky `h-14 border-b border-border bg-background/80 backdrop-blur-md`
+- Cards: `rounded-xl border border-border bg-surface p-6` — no shadows, no `rounded-3xl`
+- Buttons: rounded-full primary/secondary/accent, inline `→` at 14px, no circular arrow badge
+- Chips: `rounded-md border border-border bg-subtle px-3 py-1.5 font-mono text-xs`
+
+## Forbidden leftovers
+
+No `emerald`, `zinc`, `slate`, `rounded-3xl`, `shadow-`, or raw hex in `components/` or `app/` except particle sphere colours.
