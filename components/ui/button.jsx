@@ -21,8 +21,9 @@ const styles = cva("inline-flex items-center justify-center gap-2 font-medium tr
 });
 
 export default function Button({ href, variant, size, className, children }) {
+  const external = href?.startsWith("http");
   return (
-    <Link href={href} className={cn(styles({ variant, size }), className)}>
+    <Link href={href} className={cn(styles({ variant, size }), className)} {...(external && { target: "_blank", rel: "noopener noreferrer" })}>
       {children}
       <span className="text-[14px] leading-none" aria-hidden="true">→</span>
     </Link>
