@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { SITE, SERVICES } from "@/lib/site";
 import Logo from "@/components/logo";
+import Button from "@/components/ui/button";
 
 export default function Footer() {
   const col = "flex flex-col gap-2 text-sm text-muted";
   const h = "mb-3 font-mono text-xs uppercase tracking-wider text-faint";
   return (
-    <footer className="border-t border-border px-6 py-14 sm:px-10">
+    <footer className="border-t border-border py-14">
+      <div className="mx-auto w-full max-w-7xl px-6 sm:px-10">
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col gap-3 text-sm text-muted">
           <Logo />
@@ -28,8 +30,9 @@ export default function Footer() {
           <p className={h}>Get in touch</p>
           <div className={col}>
             <a href={`mailto:${SITE.email}`} className="hover:text-foreground">{SITE.email}</a>
-            <span>{SITE.phone}</span>
-            <span>{SITE.location}</span>
+          </div>
+          <div className="mt-4">
+            <Button href="https://calendly.com/d/d4mx-qv8-8kc" variant="primary" size="sm">Book a Meeting</Button>
           </div>
         </div>
       </div>
@@ -39,6 +42,7 @@ export default function Footer() {
           <Link href="/privacy-policy" className="hover:text-foreground">Privacy Policy</Link>
           <Link href="/terms-and-conditions" className="hover:text-foreground">Terms &amp; Conditions</Link>
         </span>
+      </div>
       </div>
     </footer>
   );

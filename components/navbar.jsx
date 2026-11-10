@@ -15,7 +15,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 h-14 border-b border-border bg-background/80 backdrop-blur-md">
-      <nav aria-label="Main" className="mx-auto flex h-full max-w-[1200px] items-center justify-between px-6">
+      <nav aria-label="Main" className="mx-auto flex h-full w-full max-w-7xl items-center justify-between px-6 sm:px-10">
         <Logo />
         <ul className="hidden items-center gap-1 text-sm text-muted lg:flex">
           {links.map((l) => (
@@ -40,7 +40,7 @@ export default function Navbar() {
         </ul>
         <div className="flex items-center gap-3">
           <Link href="/contact" className="hidden text-sm text-muted hover:text-foreground sm:inline">Contact</Link>
-          <Button href="/start-project" variant="primary" size="sm">Start a project</Button>
+          <Button href="https://calendly.com/d/d4mx-qv8-8kc" variant="primary" size="sm">Book a Meeting</Button>
           <button type="button" onClick={() => setOpen(!open)} aria-label="Menu" aria-expanded={open} className="grid h-8 w-8 place-items-center text-foreground lg:hidden">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>

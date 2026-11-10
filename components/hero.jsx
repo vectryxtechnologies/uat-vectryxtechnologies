@@ -38,7 +38,8 @@ function Progress() {
 
 export default function Hero() {
   return (
-    <section className="relative grid items-center gap-8 overflow-hidden border-b border-border px-6 py-20 sm:px-10 lg:grid-cols-2">
+    <section className="relative overflow-hidden border-b border-border py-20">
+      {/* Full-width background */}
       <div className="absolute inset-0 -z-10" aria-hidden>
         <div
           className="absolute inset-0"
@@ -54,34 +55,37 @@ export default function Hero() {
         />
       </div>
 
-      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="relative z-10 flex flex-col items-start gap-6">
-        <div className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 font-mono text-xs uppercase tracking-[0.08em] text-muted">
-          <i className="h-1.5 w-1.5 rounded-full bg-accent" />
-          Software · AI · Cloud · Data
-        </div>
-        <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.05em] sm:text-7xl">
-          <span className="bg-gradient-to-b from-foreground to-foreground/60 bg-clip-text text-transparent">Your digital<br />transformation<br /></span>
-          <span className="text-accent">partner.</span>
-        </h1>
-        <p className="max-w-[34em] text-base leading-relaxed text-muted sm:text-lg">
-          We turn spreadsheets, paper forms and manual follow-ups into custom software, web platforms, mobile apps and AI tools, built around how your business really works.
-        </p>
-        <div className="flex flex-wrap gap-3 pt-1">
-          <Button href="/start-project" variant="primary">Let&rsquo;s talk</Button>
-          <Button href="/projects" variant="secondary">See our work</Button>
-        </div>
-        <div className="flex flex-wrap gap-2.5 pt-1.5 font-mono text-xs">
-          {["100% custom-built", "Web, mobile, AI & cloud under one roof"].map((t) => (
-            <span key={t} className="flex items-center gap-2 rounded-full border border-border bg-subtle px-4 py-2"><i className="h-1.5 w-1.5 rounded-full bg-accent" />{t}</span>
-          ))}
-        </div>
-      </motion.div>
+      {/* Centered content — same max-w-7xl as the rest of the site */}
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-8 px-6 sm:px-10 lg:grid-cols-2">
+        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="relative z-10 flex flex-col items-start gap-6">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 font-mono text-xs uppercase tracking-[0.08em] text-muted">
+            <i className="h-1.5 w-1.5 rounded-full bg-accent" />
+            Software · AI · Cloud · Data
+          </div>
+          <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.05em] sm:text-7xl">
+            <span className="bg-gradient-to-b from-foreground to-foreground/60 bg-clip-text text-transparent">Your digital<br />transformation<br /></span>
+            <span className="text-accent">partner.</span>
+          </h1>
+          <p className="max-w-[34em] text-base leading-relaxed text-muted sm:text-lg">
+            We turn spreadsheets, paper forms and manual follow-ups into custom software, web platforms, mobile apps and AI tools, built around how your business really works.
+          </p>
+          <div className="flex flex-wrap gap-3 pt-1">
+            <Button href="/start-project" variant="primary">Let&rsquo;s talk</Button>
+            <Button href="/projects" variant="secondary">See our work</Button>
+          </div>
+          <div className="flex flex-wrap gap-2.5 pt-1.5 font-mono text-xs">
+            {["100% custom-built", "Web, mobile, AI & cloud under one roof"].map((t) => (
+              <span key={t} className="flex items-center gap-2 rounded-full border border-border bg-subtle px-4 py-2"><i className="h-1.5 w-1.5 rounded-full bg-accent" />{t}</span>
+            ))}
+          </div>
+        </motion.div>
 
-      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }} className="relative z-10 grid min-h-[380px] place-items-center">
-        <ParticleSphere className="aspect-square w-full max-w-[560px] touch-pan-y" />
-        <Clock />
-        <Progress />
-      </motion.div>
+        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }} className="relative z-10 grid min-h-[380px] place-items-center">
+          <ParticleSphere className="aspect-square w-full max-w-[560px] touch-pan-y" />
+          <Clock />
+          <Progress />
+        </motion.div>
+      </div>
 
       <div className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-2 font-mono text-[11px] tracking-[0.2em] text-faint sm:flex">
         <span className="flex h-[26px] w-4 justify-center rounded-full border border-border-strong p-1"><i className="h-1.5 w-[3px] animate-wheel rounded-sm bg-faint" /></span>

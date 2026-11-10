@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body className="bg-background font-sans text-foreground antialiased">
         <Navbar />
-        <div className="mx-auto max-w-[1200px] border-x border-border">
+        <div>
           <main>{children}</main>
           <Footer />
         </div>
