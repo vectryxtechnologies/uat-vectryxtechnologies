@@ -32,7 +32,7 @@ export default function Footer() {
             <a href={`mailto:${SITE.email}`} className="hover:text-foreground">{SITE.email}</a>
           </div>
           <div className="mt-4">
-            <Button href="https://calendly.com/d/d4mx-qv8-8kc" variant="primary" size="sm">Book a Meeting</Button>
+            <Button href="https://calendly.com/team-vectryxtechnologies/30min" variant="primary" size="sm">Book a Meeting</Button>
           </div>
         </div>
       </div>
