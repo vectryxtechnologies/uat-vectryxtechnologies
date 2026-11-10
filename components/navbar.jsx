@@ -40,7 +40,7 @@ export default function Navbar() {
         </ul>
         <div className="flex items-center gap-3">
           <Link href="/contact" className="hidden text-sm text-muted hover:text-foreground sm:inline">Contact</Link>
-          <Button href="https://calendly.com/d/d4mx-qv8-8kc" variant="primary" size="sm">Book a Meeting</Button>
+          <Button href="https://calendly.com/team-vectryxtechnologies/30min" variant="primary" size="sm">Book a Meeting</Button>
           <button type="button" onClick={() => setOpen(!open)} aria-label="Menu" aria-expanded={open} className="grid h-8 w-8 place-items-center text-foreground lg:hidden">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
