@@ -11,7 +11,7 @@ export function PageHeader({ eyebrow, title, intro }) {
     <section className="border-b border-border py-20">
       <div className={wrap}>
         {eyebrow && <p className="mb-3 font-mono text-xs uppercase tracking-[0.08em] text-muted">{eyebrow}</p>}
-        <h1 className="max-w-3xl bg-gradient-to-b from-foreground to-foreground/60 bg-clip-text text-5xl font-semibold leading-[1.02] tracking-[-0.05em] text-transparent sm:text-7xl">{title}</h1>
+        <h1 className="max-w-3xl text-5xl font-semibold leading-[1.02] tracking-[-0.05em] text-black sm:text-7xl">{title}</h1>
         {intro && <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">{intro}</p>}
       </div>
     </section>

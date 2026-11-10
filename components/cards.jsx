@@ -1,17 +1,27 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { SERVICES, PROJECTS, STEPS } from "@/lib/site";
+import { ArrowUpRight, Building2 } from "lucide-react";
+import { SERVICES, PROJECTS, STEPS, COMPANIES } from "@/lib/site";
 import { card, Visual } from "@/components/section";
 
 export function ServiceGrid() {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {SERVICES.map((s) => (
-        <Link key={s.slug} href={`/services/${s.slug}`} className={card + " group"}>
-          <span className="mb-4 grid h-10 w-10 place-items-center rounded-lg border border-border bg-subtle text-foreground"><s.icon className="h-4 w-4" /></span>
-          <h3 className="mb-2 flex items-center justify-between text-lg font-semibold tracking-[-0.03em]">{s.title}<ArrowUpRight className="h-4 w-4 text-faint opacity-0 transition group-hover:opacity-100" /></h3>
-          <p className="text-sm leading-relaxed text-muted">{s.short}</p>
-        </Link>
+        <div key={s.slug} className={card + " flex flex-col"}>
+          <span className="mb-4 grid h-10 w-10 place-items-center rounded-lg border border-border bg-subtle text-foreground">
+            <s.icon className="h-4 w-4" />
+          </span>
+          <h3 className="mb-2 text-lg font-semibold tracking-[-0.03em]">{s.title}</h3>
+          <p className="flex-1 text-sm leading-relaxed text-muted">{s.short}</p>
+          <div className="mt-5">
+            <Link
+              href={`/services/${s.slug}`}
+              className="inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-2 text-xs font-medium text-accent-fg transition-opacity hover:opacity-90"
+            >
+              Read More <ArrowUpRight className="h-3 w-3" />
+            </Link>
+          </div>
+        </div>
       ))}
     </div>
   );
@@ -27,6 +37,23 @@ export function ProjectGrid({ limit }) {
           <h3 className="mt-1 text-lg font-semibold tracking-[-0.03em]">{p.title}</h3>
           <p className="mt-1 text-sm text-muted">{p.summary}</p>
         </Link>
+      ))}
+    </div>
+  );
+}
+
+export function CompanyGrid() {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {COMPANIES.map((c) => (
+        <div key={c.name} className={card}>
+          <div className="mb-4 grid h-10 w-10 place-items-center rounded-lg border border-border bg-subtle text-foreground">
+            <Building2 className="h-4 w-4" />
+          </div>
+          <p className="mb-1 font-mono text-xs uppercase tracking-[0.08em] text-muted">{c.industry}</p>
+          <h3 className="mb-2 text-lg font-semibold tracking-[-0.03em]">{c.name}</h3>
+          <p className="text-sm leading-relaxed text-muted">{c.description}</p>
+        </div>
       ))}
     </div>
   );

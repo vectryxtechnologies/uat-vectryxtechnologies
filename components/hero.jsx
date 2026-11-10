@@ -7,13 +7,13 @@ import ParticleSphere from "@/components/particle-sphere";
 function Clock() {
   const [t, setT] = useState("--:--");
   useEffect(() => {
-    const tick = () => setT(new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }));
+    const tick = () => setT(new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "America/Los_Angeles" }));
     tick(); const id = setInterval(tick, 15000); return () => clearInterval(id);
   }, []);
   return (
     <div className="pointer-events-none absolute grid h-[92px] w-[92px] place-items-center rounded-full border border-border-strong bg-background text-center text-foreground">
       <div>
-        <small className="mb-0.5 block font-mono text-[9px] tracking-[0.2em] text-muted">LOCAL</small>
+        <small className="mb-0.5 block font-mono text-[9px] tracking-[0.2em] text-muted">US / PT</small>
         <b className="font-mono text-[17px] font-medium tabular-nums">{t}</b>
       </div>
     </div>
@@ -63,7 +63,7 @@ export default function Hero() {
             Software · AI · Cloud · Data
           </div>
           <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.05em] sm:text-7xl">
-            <span className="bg-gradient-to-b from-foreground to-foreground/60 bg-clip-text text-transparent">Your digital<br />transformation<br /></span>
+            <span className="text-black">Your digital<br />transformation<br /></span>
             <span className="text-accent">partner.</span>
           </h1>
           <p className="max-w-[34em] text-base leading-relaxed text-muted sm:text-lg">
