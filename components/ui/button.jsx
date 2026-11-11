@@ -5,11 +5,11 @@ import { cn } from "@/lib/utils";
 const styles = cva("inline-flex items-center justify-center gap-2 font-medium transition-opacity", {
   variants: {
     variant: {
-      primary: "rounded-full bg-foreground text-background hover:opacity-90",
-      secondary: "rounded-full border border-border-strong text-foreground hover:bg-subtle",
+      primary: "rounded-full bg-accent text-accent-fg hover:opacity-90",
+      secondary: "rounded-full border border-accent text-accent hover:bg-accent-soft",
       accent: "rounded-full bg-accent text-accent-fg hover:opacity-90",
-      dark: "rounded-full bg-foreground text-background hover:opacity-90",
-      soft: "rounded-full border border-border-strong text-foreground hover:bg-subtle",
+      dark: "rounded-full bg-accent text-accent-fg hover:opacity-90",
+      soft: "rounded-full border border-accent text-accent hover:bg-accent-soft",
       green: "rounded-full bg-accent text-accent-fg hover:opacity-90",
     },
     size: {
@@ -21,8 +21,9 @@ const styles = cva("inline-flex items-center justify-center gap-2 font-medium tr
 });
 
 export default function Button({ href, variant, size, className, children }) {
+  const external = href?.startsWith("http");
   return (
-    <Link href={href} className={cn(styles({ variant, size }), className)}>
+    <Link href={href} className={cn(styles({ variant, size }), className)} {...(external && { target: "_blank", rel: "noopener noreferrer" })}>
       {children}
       <span className="text-[14px] leading-none" aria-hidden="true">→</span>
     </Link>

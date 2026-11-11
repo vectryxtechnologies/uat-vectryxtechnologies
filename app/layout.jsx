@@ -10,6 +10,10 @@ export const metadata = {
   metadataBase: new URL(SITE.url),
   title: { default: `${SITE.name} | Software, AI & Cloud`, template: `%s | ${SITE.name}` },
   description: "Custom software, web and mobile apps, AI, data science and cloud engineering.",
+  icons: {
+    icon: "/VECTRYX Technologies Logo.png",
+    apple: "/VECTRYX Technologies Logo.png",
+  },
 };
 export const viewport = { width: "device-width", initialScale: 1, viewportFit: "cover" };
 
@@ -18,7 +22,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body className="bg-background font-sans text-foreground antialiased">
         <Navbar />
-        <div className="mx-auto max-w-[1200px] border-x border-border">
+        <div>
           <main>{children}</main>
           <Footer />
         </div>
