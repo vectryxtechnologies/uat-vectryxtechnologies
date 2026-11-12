@@ -18,7 +18,7 @@ export default function Contact() {
             <div key={t} className={card}>
               <span className="mb-4 grid h-10 w-10 place-items-center rounded-lg border border-border bg-subtle text-foreground"><I className="h-4 w-4" /></span>
               <p className="font-mono text-xs uppercase tracking-[0.08em] text-faint">{t}</p>
-              {h ? <a href={h} className="mt-1 block font-medium hover:text-accent">{v}</a> : <p className="mt-1 font-medium">{v}</p>}
+              {h ? <a href={h} className="mt-1 block font-medium hover:text-accent-ink">{v}</a> : <p className="mt-1 font-medium">{v}</p>}
             </div>
           ))}
         </div>

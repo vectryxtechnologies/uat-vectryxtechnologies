@@ -27,7 +27,7 @@ export default function ServicePage({ params }) {
             <ul className="space-y-3">
               {s.points.map((p) => (
                 <li key={p} className="flex gap-3 text-muted">
-                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-accent-ink" />
                   <span>{p}</span>
                 </li>
               ))}
@@ -131,7 +131,7 @@ export default function ServicePage({ params }) {
             <h3 className="text-xl font-semibold tracking-[-0.03em]">Engagement models</h3>
             {engagementModels.map(({ title, text }) => (
               <div key={title} className={card + " flex gap-3"}>
-                <ChevronRight className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                <ChevronRight className="mt-0.5 h-5 w-5 shrink-0 text-accent-ink" />
                 <div>
                   <p className="mb-1 font-semibold tracking-[-0.02em]">{title}</p>
                   <p className="text-sm leading-relaxed text-muted">{text}</p>

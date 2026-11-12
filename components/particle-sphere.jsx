@@ -1,40 +1,211 @@
 "use client";
+
 import { useEffect, useRef } from "react";
-const COUNT=1350;
-const PALETTE=["#3db663","#23874a","#235c45","#69bd83","#1f1c1d","#b07040"];
-function pointAt(index,shape){
- const u=index/COUNT,a=index*2.399963,y=1-2*u,r=Math.sqrt(1-y*y);
- if(shape===1){const v=a*.24,t=u*Math.PI*2;return[Math.cos(t)*(.64+.26*Math.cos(v)),Math.sin(t)*(.64+.26*Math.cos(v)),.26*Math.sin(v)]}
- if(shape===2){const t=u*Math.PI*7,side=index%2?1:-1;return[Math.cos(t)*.54*side,y,Math.sin(t)*.54*side]}
- if(shape===3){const face=index%6,p=(Math.sin(a)*.5+.5)*1.5-.75,q=(Math.cos(index*1.71)*.5+.5)*1.5-.75;return face<2?[(face?1:-1)*.75,p,q]:face<4?[p,(face===3?1:-1)*.75,q]:[p,q,(face===5?1:-1)*.75]}
- if(shape===4){const t=u*Math.PI*2;return[(1-u*1.2)*Math.cos(t*3),y*.7+.16*Math.cos(a),(1-u*1.2)*Math.sin(t*3)]}
- return[Math.cos(a)*r,y,Math.sin(a)*r];
-}
-export default function ParticleSphere({className,stage=0}){
- const canvasRef=useRef(null),stageRef=useRef(stage);
- useEffect(()=>{stageRef.current=stage},[stage]);
- useEffect(()=>{
-  const canvas=canvasRef.current,ctx=canvas.getContext("2d");if(!ctx)return;
-  const media=matchMedia("(prefers-reduced-motion: reduce)");
-  let width=0,height=0,frame=0,rotation=0,last=0,inView=true,pointer={x:-9999,y:-9999};
-  const points=Array.from({length:COUNT},(_,i)=>({position:pointAt(i,0),color:PALETTE[i%23===0?5:i%11===0?4:i%4]}));
-  const draw=time=>{
-   if(!inView||document.hidden){last=time;return}
-   const dt=Math.min((time-last)||16,40);last=time;if(!media.matches)rotation+=dt*.000095;
-   ctx.clearRect(0,0,width,height);
-   const mobile=width<=800,cx=mobile?width*.5:width*.738,cy=mobile?height-210:height*.53;
-   const radius=mobile?Math.min(width*.34,155):Math.min(width*.185,height*.305,290),cs=Math.cos(rotation),sn=Math.sin(rotation),tilt=.16;
-   const projected=points.map((p,i)=>{const target=pointAt(i,stageRef.current);for(let j=0;j<3;j++)p.position[j]+=(target[j]-p.position[j])*.035;const[x,y,z]=p.position,rx=x*cs+z*sn,rz=-x*sn+z*cs;return{p,x:rx,y:y*Math.cos(tilt)-rz*Math.sin(tilt),z:y*Math.sin(tilt)+rz*Math.cos(tilt)}}).sort((a,b)=>a.z-b.z);
-   for(const{p,x,y,z}of projected){const depth=(z+1)/2;let px=cx+x*radius,py=cy+y*radius;const dx=px-pointer.x,dy=py-pointer.y,d=Math.hypot(dx,dy);if(d<100&&d>0&&!media.matches){const force=(1-d/100)*17;px+=dx/d*force;py+=dy/d*force}ctx.globalAlpha=.2+depth*.8;ctx.fillStyle=p.color;ctx.beginPath();ctx.ellipse(px,py,1.5+depth*2.1,1.1+depth*1.6,Math.atan2(y,x)+rotation,0,Math.PI*2);ctx.fill()}
-   for(let i=0;i<56;i++){const seed=Math.abs(Math.sin(i*175.7)),x=(seed*width+Math.sin(rotation*.6+i)*20)%width,y=Math.abs(Math.cos(i*53.3))*height+Math.cos(rotation+i)*13;ctx.globalAlpha=.14+(i%3)*.09;ctx.fillStyle=PALETTE[i%6];ctx.beginPath();ctx.arc(x,y,1+i%4,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;
-  };
-  const resize=()=>{const rect=canvas.getBoundingClientRect();width=rect.width;height=rect.height;const dpr=Math.min(devicePixelRatio||1,2);canvas.width=width*dpr;canvas.height=height*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);if(media.matches)draw(0)};
-  const loop=t=>{draw(t);frame=requestAnimationFrame(loop)};
-  const onPointer=e=>{const rect=canvas.getBoundingClientRect();pointer={x:e.clientX-rect.left,y:e.clientY-rect.top}};
-  const observer=new IntersectionObserver(([entry])=>{inView=entry.isIntersecting},{threshold:0});observer.observe(canvas);
-  const ro=new ResizeObserver(resize);ro.observe(canvas);resize();draw(0);if(!media.matches)frame=requestAnimationFrame(loop);
-  window.addEventListener("pointermove",onPointer,{passive:true});
-  return()=>{cancelAnimationFrame(frame);observer.disconnect();ro.disconnect();window.removeEventListener("pointermove",onPointer)};
- },[]);
- return <canvas ref={canvasRef} className={className} aria-hidden="true"/>;
+import { CYCLE_MS, SCATTER_START_MS, SHAPE_COUNT, clamp, sampleCycle, scatterPoint, seed, shapePoint } from "@/lib/particle-motion.mjs";
+
+const PALETTE = ["#f5c518", "#d3a408", "#a67c00", "#ffe78c", "#29251b", "#c48e3c"];
+
+export default function ParticleSphere({ className, onStageChange, burstKey = 0, paused = false }) {
+  const canvasRef = useRef(null);
+  const controls = useRef(null);
+  const settings = useRef({ onStageChange, burstKey, paused });
+  settings.current = { onStageChange, burstKey, paused };
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d", { alpha: true });
+    if (!ctx) return;
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    const finePointer = matchMedia("(hover: hover) and (pointer: fine)");
+    const count = finePointer.matches ? 1250 : 780;
+    const particles = Array.from({ length: count }, (_, i) => ({
+      shapes: Array.from({ length: SHAPE_COUNT }, (_, shape) => shapePoint(i, count, shape)),
+      scatter: scatterPoint(i),
+      color: PALETTE[i % 19 === 0 ? 4 : i % 29 === 0 ? 5 : i % 4],
+      size: .85 + seed(i, 8) * 1.15,
+      angle: seed(i, 9) * Math.PI * 2,
+      x: 0, y: 0, z: 0, scale: 1, pushX: 0, pushY: 0,
+    }));
+    const depthOrder = particles.slice();
+    let width = 0, height = 0, frame = 0, last = 0, elapsed = 0, rotation = 0;
+    let inView = false, lastShape = -1, seenBurst = settings.current.burstKey;
+    let pointerX = 0, pointerY = 0, tiltX = 0, tiltY = 0;
+    let cursorX = -9999, cursorY = -9999;
+
+    function draw(dt = 0) {
+      if (!width || !height) return;
+      const moving = !reduced.matches && !settings.current.paused;
+      if (moving) {
+        elapsed += dt;
+        rotation += dt * .00014;
+      }
+      const motion = reduced.matches ? { shape: 0, scatter: 0 } : sampleCycle(elapsed);
+      if (motion.shape !== lastShape) {
+        lastShape = motion.shape;
+        settings.current.onStageChange?.(lastShape);
+      }
+      const follow = 1 - Math.exp(-dt * .006);
+      tiltX += ((moving ? pointerX : 0) - tiltX) * follow;
+      tiltY += ((moving ? pointerY : 0) - tiltY) * follow;
+      const radius = Math.min(width * .345, (height - 95) * .42, 225);
+      const cx = width * .5 + tiltX * 17;
+      const cy = (height - 80) * .49 + tiltY * 12;
+      const yaw = rotation + tiltX * .52;
+      const pitch = -.2 - tiltY * .32;
+      const cosY = Math.cos(yaw), sinY = Math.sin(yaw);
+      const cosX = Math.cos(pitch), sinX = Math.sin(pitch);
+      const scatter = motion.scatter;
+      const curve = Math.sin(scatter * Math.PI) * .2;
+      ctx.clearRect(0, 0, width, height);
+
+      // Diffuse shadow and halo give the particles a volume to inhabit.
+      const groundY = Math.min(height - 82, cy + radius * 1.14);
+      const shadow = ctx.createRadialGradient(cx, groundY, 0, cx, groundY, radius);
+      shadow.addColorStop(0, `rgba(83,62,15,${.14 * (1 - scatter * .6)})`);
+      shadow.addColorStop(1, "rgba(83,62,15,0)");
+      ctx.save();
+      ctx.translate(cx, groundY);
+      ctx.scale(1, .14);
+      ctx.translate(-cx, -groundY);
+      ctx.fillStyle = shadow;
+      ctx.fillRect(cx - radius, groundY - radius, radius * 2, radius * 2);
+      ctx.restore();
+      const halo = ctx.createRadialGradient(cx - radius * .2, cy - radius * .2, 0, cx, cy, radius * 1.45);
+      halo.addColorStop(0, `rgba(245,197,24,${.06 * (1 - scatter)})`);
+      halo.addColorStop(1, "rgba(245,197,24,0)");
+      ctx.fillStyle = halo;
+      ctx.fillRect(0, 0, width, height);
+
+      for (const p of particles) {
+        const target = p.shapes[motion.shape];
+        const x = target[0] + (p.scatter[0] - target[0]) * scatter + Math.sin(p.angle) * curve;
+        const y = target[1] + (p.scatter[1] - target[1]) * scatter + Math.cos(p.angle) * curve;
+        const z = target[2] + (p.scatter[2] - target[2]) * scatter;
+        const rx = x * cosY + z * sinY;
+        const rz = -x * sinY + z * cosY;
+        p.y = y * cosX - rz * sinX;
+        p.z = y * sinX + rz * cosX;
+        p.scale = 4.8 / (4.8 - p.z);
+        p.x = cx + rx * radius * p.scale;
+        p.y = cy + p.y * radius * p.scale;
+        // Keep the original close-range cursor repulsion on top of the 3D tilt.
+        // A short spring return lets individual beads settle back into their form.
+        if (reduced.matches) { p.pushX = 0; p.pushY = 0; }
+        else if (moving) {
+          const dx = p.x - cursorX, dy = p.y - cursorY;
+          const distance = Math.hypot(dx, dy);
+          const force = distance > 0 && distance < 100 ? (1 - distance / 100) * 22 : 0;
+          const response = 1 - Math.exp(-dt * .018);
+          p.pushX += ((force ? dx / distance * force : 0) - p.pushX) * response;
+          p.pushY += ((force ? dy / distance * force : 0) - p.pushY) * response;
+        }
+        p.x += p.pushX;
+        p.y += p.pushY;
+      }
+      depthOrder.sort((a, b) => a.z - b.z);
+      for (const p of depthOrder) {
+        const depth = clamp((p.z + 1.5) / 3);
+        const size = p.size * (.75 + depth * 1.05) * p.scale;
+        ctx.globalAlpha = (.16 + depth * .8) * (1 - scatter * .25);
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.ellipse(p.x, p.y, size, size * .84, -.4 + yaw * .25, 0, Math.PI * 2);
+        ctx.fill();
+        // Sparse highlights read as beads without expensive per-dot blur.
+        if (depth > .69 && size > 1.8) {
+          ctx.globalAlpha = (depth - .45) * .66;
+          ctx.fillStyle = "#fff8df";
+          ctx.beginPath();
+          ctx.arc(p.x - size * .26, p.y - size * .3, size * .32, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    const canAnimate = () => inView && !document.hidden && !reduced.matches && !settings.current.paused;
+    function tick(time) {
+      frame = 0;
+      if (!canAnimate()) return;
+      const dt = last ? Math.min(time - last, 48) : 16;
+      last = time;
+      draw(dt);
+      frame = requestAnimationFrame(tick);
+    }
+    function sync() {
+      if (seenBurst !== settings.current.burstKey) {
+        seenBurst = settings.current.burstKey;
+        if (!reduced.matches) {
+          // Start at the current dispersion to prevent jumps when tapped mid-formation.
+          const current = sampleCycle(elapsed);
+          let lo = 0, hi = 1;
+          for (let i = 0; i < 18; i++) {
+            const mid = (lo + hi) / 2;
+            const value = sampleCycle(SCATTER_START_MS + mid * 2300).scatter;
+            if (value < current.scatter) lo = mid; else hi = mid;
+          }
+          elapsed = Math.floor(elapsed / CYCLE_MS) * CYCLE_MS + SCATTER_START_MS + (lo + hi) * 1150;
+        }
+      }
+      if (!canAnimate()) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+        last = 0;
+        if (reduced.matches) { tiltX = 0; tiltY = 0; rotation = .35; }
+        draw();
+      } else if (!frame) {
+        last = 0;
+        frame = requestAnimationFrame(tick);
+      }
+    }
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw();
+    };
+    const resetPointer = () => { pointerX = 0; pointerY = 0; cursorX = -9999; cursorY = -9999; };
+    const onPointer = event => {
+      if (event.pointerType === "touch" || !finePointer.matches || reduced.matches) return;
+      const hero = canvas.closest("section").getBoundingClientRect();
+      if (event.clientY < hero.top || event.clientY > hero.bottom) { resetPointer(); return; }
+      pointerX = clamp((event.clientX - hero.left) / hero.width * 2 - 1, -1, 1);
+      pointerY = clamp((event.clientY - hero.top) / hero.height * 2 - 1, -1, 1);
+      const rect = canvas.getBoundingClientRect();
+      cursorX = event.clientX - rect.left;
+      cursorY = event.clientY - rect.top;
+    };
+    const observer = new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; sync(); }, { threshold: .01 });
+    const resizeObserver = new ResizeObserver(resize);
+    observer.observe(canvas);
+    resizeObserver.observe(canvas);
+    window.addEventListener("pointermove", onPointer, { passive: true });
+    document.documentElement.addEventListener("pointerleave", resetPointer);
+    window.addEventListener("blur", resetPointer);
+    document.addEventListener("visibilitychange", sync);
+    reduced.addEventListener("change", sync);
+    finePointer.addEventListener("change", resetPointer);
+    controls.current = { sync };
+    resize();
+    return () => {
+      controls.current = null;
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      resizeObserver.disconnect();
+      window.removeEventListener("pointermove", onPointer);
+      document.documentElement.removeEventListener("pointerleave", resetPointer);
+      window.removeEventListener("blur", resetPointer);
+      document.removeEventListener("visibilitychange", sync);
+      reduced.removeEventListener("change", sync);
+      finePointer.removeEventListener("change", resetPointer);
+    };
+  }, []);
+
+  useEffect(() => { controls.current?.sync(); }, [paused, burstKey]);
+
+  return <canvas ref={canvasRef} className={className} aria-hidden="true" />;
 }

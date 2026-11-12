@@ -18,7 +18,7 @@ export default function Project({ params }) {
         <div className={card}><h2 className="mb-2 font-semibold tracking-[-0.03em]">Our solution</h2><p className="text-muted">{p.solution}</p></div>
         <div className={card}>
           <h2 className="mb-3 font-semibold tracking-[-0.03em]">Results</h2>
-          <ul className="space-y-2">{p.results.map((r) => <li key={r} className="flex gap-2 text-muted"><Check className="mt-0.5 h-5 w-5 text-accent" />{r}</li>)}</ul>
+          <ul className="space-y-2">{p.results.map((r) => <li key={r} className="flex gap-2 text-muted"><Check className="mt-0.5 h-5 w-5 text-accent-ink" />{r}</li>)}</ul>
         </div>
         <div className={card}>
           <h2 className="mb-3 font-semibold tracking-[-0.03em]">Tech stack</h2>

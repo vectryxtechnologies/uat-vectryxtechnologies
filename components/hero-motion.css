@@ -1,0 +1,17 @@
+.hero-art-slot::before{content:"";position:absolute;inset:12% 4% 20%;z-index:-1;border-radius:50%;background:radial-gradient(ellipse,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%);pointer-events:none}
+.hero-art-slot .hero-particles{cursor:crosshair;touch-action:pan-y;pointer-events:auto}
+.hero-art-slot .particle-status{bottom:12px;z-index:2;width:max-content;max-width:100%;padding:10px 12px 10px 16px;gap:10px;border:1px solid color-mix(in srgb,var(--accent) 16%,white);backdrop-filter:blur(14px);animation:hero-detail-enter 1s var(--ease) .5s both}
+.status-orbit.is-paused{animation-play-state:paused}
+.particle-controls{display:flex;align-items:center;gap:5px;margin-left:5px;padding-left:10px;border-left:1px solid var(--border-strong)}
+.particle-control{display:grid;place-items:center;width:32px;height:32px;flex:none;border:1px solid var(--border);border-radius:50%;background:var(--surface);color:var(--accent-ink);transition:background .25s var(--ease),color .25s var(--ease),scale .25s var(--ease),box-shadow .25s var(--ease)}
+.particle-control:is(:hover,:focus-visible){background:var(--accent);color:var(--accent-fg);box-shadow:0 4px 12px color-mix(in srgb,var(--accent) 25%,transparent)}
+.particle-control:active{scale:.9}
+.particle-control:disabled{opacity:.45;cursor:default}
+.particle-hint{position:absolute;bottom:82px;left:50%;transform:translateX(-50%);z-index:1;white-space:nowrap;font:500 10px/1.6 "JetBrains Mono",monospace;letter-spacing:.03em;color:var(--fg-muted);pointer-events:none;animation:hero-detail-enter 1s var(--ease) .75s both}
+.hero-art-slot .status-dots{min-width:68px}
+@keyframes hero-detail-enter{from{opacity:0;translate:0 16px;filter:blur(4px)}to{opacity:1;translate:0 0;filter:blur(0)}}
+.particle-hint-touch{display:none}
+@media(hover:none),(pointer:coarse){.particle-hint-pointer{display:none}.particle-hint-touch{display:inline}.hero-art-slot .hero-particles{cursor:default}}
+@media(max-width:800px){.hero-art-slot{margin-top:14px;min-height:410px}.hero-art-slot .particle-status{bottom:8px}.particle-hint{bottom:75px}}
+@media(max-width:520px){.hero-art-slot{min-height:360px;margin-inline:-4px}.hero-art-slot .particle-status{font-size:12px;padding:9px 10px;gap:8px}.particle-controls{padding-left:8px;margin-left:1px}.particle-control{width:30px;height:30px}.particle-status .status-dots{gap:4px}.particle-status .status-dots i{width:6px;height:6px}.particle-status .status-dots i.active{width:19px}.particle-hint{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.hero-enter,.hero-art-slot .particle-status,.particle-hint{animation:none;filter:none}.particle-control{transition:none}.particle-control:active{scale:1}.particle-hint{display:none}}

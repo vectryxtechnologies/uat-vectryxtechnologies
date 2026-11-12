@@ -4,6 +4,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import WhatsAppFab from "@/components/whatsapp-fab";
 import PageEffects from "@/components/page-effects";
+import CursorTrail from "@/components/cursor-trail";
 
 export const metadata = {
   metadataBase: new URL(SITE.url),
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="bg-background font-sans text-foreground antialiased">
         <PageEffects />
+        <CursorTrail />
         <Navbar />
         <div>
           <main>{children}</main>

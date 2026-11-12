@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="vx-footer-brand"><Logo /><p>Software, AI and cloud engineering for ambitious businesses.</p></div>
           <div><h3>Services</h3><ul>{SERVICES.map((service) => <li key={service.slug}><Link href={`/services/${service.slug}`}>{service.title}</Link></li>)}</ul></div>
           <div><h3>Company</h3><ul>{[["About", "/about"], ["How we work", "/how-we-work"], ["Projects", "/projects"], ["Technologies", "/technologies"], ["Contact", "/contact"]].map(([label, href]) => <li key={href}><Link href={href}>{label}</Link></li>)}</ul></div>
-          <div className="vx-footer-contact"><h3>Get in touch</h3><a href={`mailto:${SITE.email}`}>{SITE.email}</a><Button href="https://calendly.com/team-vectryxtechnologies/30min" variant="green" size="sm">Book a Meeting</Button></div>
+          <div className="vx-footer-contact"><h3>Get in touch</h3><a href={`mailto:${SITE.email}`}>{SITE.email}</a><Button href="https://calendly.com/team-vectryxtechnologies/30min" variant="accent" size="sm">Book a Meeting</Button></div>
         </div>
         <div className="vx-footer-sign">
           <p className="vx-footer-eyebrow"><i />{SITE.name} · {SITE.location}</p>

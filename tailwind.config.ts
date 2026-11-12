@@ -25,6 +25,7 @@ const config: Config = {
         faint: "var(--fg-faint)",
         accent: {
           DEFAULT: "var(--accent)",
+          ink: "var(--accent-ink)",
           fg: "var(--accent-fg)",
           soft: "var(--accent-soft)",
         },

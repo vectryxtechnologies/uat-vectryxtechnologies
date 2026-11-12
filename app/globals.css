@@ -4,9 +4,9 @@
 @tailwind utilities;
 
 :root {
- --bg:#f2f3f7; --bg-subtle:#e9ebf1; --surface:#f7f8fb; --border:rgba(10,40,45,.09); --border-strong:rgba(10,40,45,.2);
- --fg:#1f1c1d; --fg-muted:#646b76; --fg-faint:#7b838b; --accent:#3db663; --accent-fg:#fff; --accent-soft:#ddf2e4;
- --green-ink:#23874a; --teal:#0a282d; --peach:#e5ba97; --grid-line:rgba(10,40,45,.055);
+ --bg:#f2f3f7; --bg-subtle:#e9ebf1; --surface:#f7f8fb; --border:rgba(41,37,27,.09); --border-strong:rgba(41,37,27,.2);
+ --fg:#1f1c1d; --fg-muted:#646b76; --fg-faint:#7b838b; --accent:#f5c518; --accent-fg:#29251b; --accent-soft:#fff3c4;
+ --accent-ink:#806000; --accent-display:#9a7300; --accent-hover:#dfad0a; --surface-dark:#29251b; --fg-on-dark:#fff8df; --fg-muted-on-dark:#c6bea8; --peach:#e5ba97; --grid-line:rgba(41,37,27,.055);
  --shadow-raise:12px 12px 28px rgba(160,166,186,.42),-12px -12px 28px rgba(255,255,255,.95);
  --shadow-soft:6px 6px 16px rgba(160,166,186,.35),-6px -6px 16px rgba(255,255,255,.9);
  --shadow-press:inset 6px 6px 14px rgba(160,166,186,.38),inset -6px -6px 14px rgba(255,255,255,.95);
@@ -24,22 +24,17 @@ button {font:inherit}
 a {text-decoration:none}
 button:not(:disabled),summary {cursor:pointer}
 img {max-width:100%}
-::selection {background:var(--accent);color:#fff}
-:focus-visible {outline:2px solid var(--accent);outline-offset:5px;border-radius:6px}
+::selection {background:var(--accent);color:var(--accent-fg)}
+:focus-visible {outline:2px solid var(--accent-ink);outline-offset:5px;border-radius:6px}
+:is(.vx-footer,.vx-mobile-menu,.service-dark.expanded,.vx-cta) :focus-visible {outline-color:var(--accent)}
 .site-wrap {width:100%;max-width:1280px;padding-inline:var(--gutter);margin-inline:auto}
-.eyebrow {display:inline-flex;align-items:center;gap:10px;font:500 12px/1.7 "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--green-ink)}
+.eyebrow {display:inline-flex;align-items:center;gap:10px;font:500 12px/1.7 "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-ink)}
 .eyebrow::before {content:"";flex:none;width:8px;height:8px;margin-right:14px;border-radius:50%;background:var(--accent);box-shadow:14px 0 0 -1px var(--peach)}
 .btn-row {display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .text-link {display:inline-flex;align-items:center;gap:12px;font-weight:600;font-size:15px}
 .text-link svg {width:18px;transition:transform .35s var(--ease)}
 .text-link:hover svg {transform:translate(3px,-3px)}
-.motion-ready [data-reveal] {opacity:0;transform:translateY(28px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
-.motion-ready [data-reveal].is-visible {opacity:1;transform:translateY(0)}
-.page-loader {position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;justify-content:center;align-items:center;background:var(--bg);transition:opacity .5s var(--ease),visibility .5s;pointer-events:none}
-.page-loader.is-loaded {opacity:0;visibility:hidden}
-.loader-mark {width:70px;height:70px;display:grid;place-items:center;color:var(--accent);font:800 62px/1 var(--font-display)}
-.loader-count {margin:20px 0 8px;font:500 13px "JetBrains Mono",monospace;letter-spacing:.1em}
-.loader-brand {color:var(--fg-muted);font-size:13px}
+[data-entering] {will-change:opacity,translate,scale}
 .back-to-top {position:fixed;right:28px;bottom:102px;width:48px;height:48px;z-index:40;display:grid;place-items:center;border-radius:50%;background:rgba(242,243,247,.88);box-shadow:var(--shadow-soft);border:1px solid #fff;opacity:0;pointer-events:none;transform:translateY(12px);transition:.35s var(--ease);backdrop-filter:blur(10px)}
 .back-to-top.visible {opacity:1;pointer-events:auto;transform:none}
 .back-to-top svg {width:18px}
@@ -48,4 +43,4 @@ html.lenis,html.lenis body {height:auto}
 .lenis.lenis-stopped {overflow:hidden}
 .lenis.lenis-smooth [data-lenis-prevent] {overscroll-behavior:contain}
 @media(max-width:600px){body{font-size:16px}.back-to-top{right:20px;bottom:92px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.motion-ready [data-reveal]{opacity:1;transform:none}.page-loader{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}[data-entering]{will-change:auto}}
