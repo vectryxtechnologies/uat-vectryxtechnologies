@@ -1,10 +1,9 @@
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import WhatsAppFab from "@/components/whatsapp-fab";
+import PageEffects from "@/components/page-effects";
 
 export const metadata = {
   metadataBase: new URL(SITE.url),
@@ -19,8 +18,9 @@ export const viewport = { width: "device-width", initialScale: 1, viewportFit: "
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en">
       <body className="bg-background font-sans text-foreground antialiased">
+        <PageEffects />
         <Navbar />
         <div>
           <main>{children}</main>

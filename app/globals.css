@@ -1,29 +1,51 @@
+@import "../lib/fonts.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg: #ffffff;
-  --bg-subtle: #fafafa;
-  --surface: #ffffff;
-  --border: #eaeaea;
-  --border-strong: #d4d4d4;
-  --fg: #000000;
-  --fg-muted: #666666;
-  --fg-faint: #8f8f8f;
-  --accent: #0070f3;
-  --accent-fg: #ffffff;
-  --accent-soft: rgba(0, 112, 243, 0.08);
-  --glow-a: rgba(0, 112, 243, 0.18);
-  --glow-b: rgba(121, 40, 202, 0.14);
-  --grid-line: rgba(0, 0, 0, 0.06);
+ --bg:#f2f3f7; --bg-subtle:#e9ebf1; --surface:#f7f8fb; --border:rgba(10,40,45,.09); --border-strong:rgba(10,40,45,.2);
+ --fg:#1f1c1d; --fg-muted:#646b76; --fg-faint:#7b838b; --accent:#3db663; --accent-fg:#fff; --accent-soft:#ddf2e4;
+ --green-ink:#23874a; --teal:#0a282d; --peach:#e5ba97; --grid-line:rgba(10,40,45,.055);
+ --shadow-raise:12px 12px 28px rgba(160,166,186,.42),-12px -12px 28px rgba(255,255,255,.95);
+ --shadow-soft:6px 6px 16px rgba(160,166,186,.35),-6px -6px 16px rgba(255,255,255,.9);
+ --shadow-press:inset 6px 6px 14px rgba(160,166,186,.38),inset -6px -6px 14px rgba(255,255,255,.95);
+ --ease:cubic-bezier(.22,1,.36,1); --gutter:clamp(16px,4vw,56px);
+ --font-body:"Figtree","Segoe UI",sans-serif; --font-display:"Outfit","Avenir Next","Segoe UI",sans-serif;
+ color-scheme:light;
 }
-
-
-html { scroll-behavior: smooth; }
-body { font-feature-settings: "ss01", "cv11"; }
-::selection { background: var(--accent); color: var(--accent-fg); }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth;scroll-padding-top:110px}
+body {margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html,body {overflow-x:clip}
+h1,h2,h3,h4 {font-family:var(--font-display);letter-spacing:-.035em;line-height:1.06;text-wrap:balance}
+button,a {-webkit-tap-highlight-color:transparent}
+button {font:inherit}
+a {text-decoration:none}
+button:not(:disabled),summary {cursor:pointer}
+img {max-width:100%}
+::selection {background:var(--accent);color:#fff}
+:focus-visible {outline:2px solid var(--accent);outline-offset:5px;border-radius:6px}
+.site-wrap {width:100%;max-width:1280px;padding-inline:var(--gutter);margin-inline:auto}
+.eyebrow {display:inline-flex;align-items:center;gap:10px;font:500 12px/1.7 "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--green-ink)}
+.eyebrow::before {content:"";flex:none;width:8px;height:8px;margin-right:14px;border-radius:50%;background:var(--accent);box-shadow:14px 0 0 -1px var(--peach)}
+.btn-row {display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.text-link {display:inline-flex;align-items:center;gap:12px;font-weight:600;font-size:15px}
+.text-link svg {width:18px;transition:transform .35s var(--ease)}
+.text-link:hover svg {transform:translate(3px,-3px)}
+.motion-ready [data-reveal] {opacity:0;transform:translateY(28px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.motion-ready [data-reveal].is-visible {opacity:1;transform:translateY(0)}
+.page-loader {position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;justify-content:center;align-items:center;background:var(--bg);transition:opacity .5s var(--ease),visibility .5s;pointer-events:none}
+.page-loader.is-loaded {opacity:0;visibility:hidden}
+.loader-mark {width:70px;height:70px;display:grid;place-items:center;color:var(--accent);font:800 62px/1 var(--font-display)}
+.loader-count {margin:20px 0 8px;font:500 13px "JetBrains Mono",monospace;letter-spacing:.1em}
+.loader-brand {color:var(--fg-muted);font-size:13px}
+.back-to-top {position:fixed;right:28px;bottom:102px;width:48px;height:48px;z-index:40;display:grid;place-items:center;border-radius:50%;background:rgba(242,243,247,.88);box-shadow:var(--shadow-soft);border:1px solid #fff;opacity:0;pointer-events:none;transform:translateY(12px);transition:.35s var(--ease);backdrop-filter:blur(10px)}
+.back-to-top.visible {opacity:1;pointer-events:auto;transform:none}
+.back-to-top svg {width:18px}
+html.lenis,html.lenis body {height:auto}
+.lenis.lenis-smooth {scroll-behavior:auto!important}
+.lenis.lenis-stopped {overflow:hidden}
+.lenis.lenis-smooth [data-lenis-prevent] {overscroll-behavior:contain}
+@media(max-width:600px){body{font-size:16px}.back-to-top{right:20px;bottom:92px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.motion-ready [data-reveal]{opacity:1;transform:none}.page-loader{display:none}}

@@ -4,6 +4,7 @@ import { Check, ChevronRight } from "lucide-react";
 import { SERVICES, SHARED_CONTENT } from "@/lib/site";
 import { PageHeader, Section, CTA, Visual, card, wrap } from "@/components/section";
 import Button from "@/components/ui/button";
+import { FAQ } from "@/components/home-content";
 
 export const generateStaticParams = () => SERVICES.map((s) => ({ slug: s.slug }));
 export const generateMetadata = ({ params }) => ({ title: SERVICES.find((s) => s.slug === params.slug)?.title });
@@ -79,26 +80,22 @@ export default function ServicePage({ params }) {
       {/* Service-specific FAQ */}
       {s.faqs?.length > 0 && (
         <Section eyebrow="FAQ" title="Frequently asked questions">
-          <div className="grid gap-4 sm:grid-cols-2">
-            {s.faqs.map(({ q, a }) => (
-              <div key={q} className={card}>
-                <p className="mb-2 font-semibold tracking-[-0.02em]">{q}</p>
-                <p className="text-sm leading-relaxed text-muted">{a}</p>
-              </div>
-            ))}
-          </div>
+          <FAQ items={s.faqs} />
         </Section>
       )}
 
       {/* Service-specific CTA */}
       {s.finalCTA && (
-        <section className="border-b border-border py-20">
+        <section className="vx-section vx-cta-section">
           <div className={wrap}>
-            <div className="rounded-xl border border-border bg-subtle p-12 text-center">
-              <h2 className="mx-auto max-w-2xl text-3xl font-semibold tracking-[-0.03em] sm:text-5xl">{s.finalCTA.heading}</h2>
-              <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-muted sm:text-lg">{s.finalCTA.body}</p>
-              <div className="mt-8 flex justify-center">
-                <Button href="/start-project" variant="primary">{s.finalCTA.buttonText}</Button>
+            <div className="vx-cta">
+              <div className="vx-cta-orbit" aria-hidden="true" />
+              <div className="vx-cta-content">
+                <h2>{s.finalCTA.heading}</h2>
+                <div className="vx-cta-bottom">
+                  <p>{s.finalCTA.body}</p>
+                  <Button href="/start-project" variant="accent">{s.finalCTA.buttonText}</Button>
+                </div>
               </div>
             </div>
           </div>
@@ -147,14 +144,7 @@ export default function ServicePage({ params }) {
 
       {/* General FAQs */}
       <Section eyebrow="General" title="Working with us">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {generalFAQs.map(({ q, a }) => (
-            <div key={q} className={card}>
-              <p className="mb-2 font-semibold tracking-[-0.02em]">{q}</p>
-              <p className="text-sm leading-relaxed text-muted">{a}</p>
-            </div>
-          ))}
-        </div>
+        <FAQ items={generalFAQs} />
       </Section>
 
       {/* Other Services */}

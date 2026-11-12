@@ -1,17 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
 
-export default function Logo({ className = "h-14 w-auto" }) {
+export default function Logo({ className = "" }) {
   return (
-    <Link href="/" className="flex items-center">
-      <Image
-        src="/VECTRYX Technologies Logo.png"
-        alt="Vectryx Technologies"
-        width={240}
-        height={80}
-        className={`${className} object-contain`}
-        priority
-      />
+    <Link href="/" className={`vx-logo ${className}`} aria-label="Vectryx Technologies home">
+      <span className="vx-logo-mark" aria-hidden="true"><img src="/VECTRYX Technologies Logo.png" alt="" width="78" height="78" /></span>
+      <span className="vx-logo-word">Vectryx<span>Technologies</span></span>
     </Link>
   );
 }
