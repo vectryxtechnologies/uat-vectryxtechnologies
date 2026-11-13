@@ -37,9 +37,14 @@ const config: Config = {
       },
       keyframes: {
         wheel: { "50%": { transform: "translateY(6px)" } },
+        fadeIn: {
+          "0%": { opacity: "0", transform: "scale(0.97)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
       },
       animation: {
         wheel: "wheel 1.6s ease-in-out infinite",
+        fadeIn: "fadeIn 0.4s ease-out forwards",
       },
     },
   },

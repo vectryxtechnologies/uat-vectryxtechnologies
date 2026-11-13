@@ -44,3 +44,7 @@ html.lenis,html.lenis body {height:auto}
 .lenis.lenis-smooth [data-lenis-prevent] {overscroll-behavior:contain}
 @media(max-width:600px){body{font-size:16px}.back-to-top{right:20px;bottom:92px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}[data-entering]{will-change:auto}}
+
+/* Hide scrollbar on thumbnail strip */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
