@@ -14,7 +14,7 @@ export default function About() {
       <Section className="grid items-center gap-10 lg:grid-cols-2">
         <div className="space-y-4 leading-relaxed text-muted">
           <p>Our team combines product thinking, engineering and cloud expertise, so ideas move from sketch to production without hand-offs getting lost.</p>
-          <p>Replace this paragraph with your company story, founding year, team size and the industries you serve.</p>
+          <p>We partner with ambitious startups, growing businesses, and established organizations to build resilient web platforms, mobile applications, and intelligent automation systems tailored to their operational goals.</p>
         </div>
         <Visual image={null} alt="Our team" icon={Handshake} />
       </Section>
