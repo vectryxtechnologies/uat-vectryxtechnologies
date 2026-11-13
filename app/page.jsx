@@ -1,6 +1,7 @@
 import Hero from "@/components/hero";
 import { Section, CTA } from "@/components/section";
 import { ServiceGrid, ProjectGrid, Steps, CompanyGrid } from "@/components/cards";
+import ClientWorkGrid from "@/components/client-work-grid";
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
         <ServiceGrid />
       </Section>
       <Section eyebrow="How we work" title="A simple, transparent process"><Steps /></Section>
-      <Section eyebrow="Selected work" title="Recent projects"><ProjectGrid limit={3} /></Section>
+      <Section eyebrow="Selected work" title="Recent client projects"><ClientWorkGrid /></Section>
       <Section eyebrow="Our clients" title="Recent companies" intro="A selection of businesses we have partnered with to deliver technology solutions."><CompanyGrid /></Section>
       <CTA />
     </>
